@@ -1,0 +1,81 @@
+=ap
+A
+<ctrl r>
+r
+R
+ce
+c2w
+c$
+%
+:s/thee/the
+:s/thee/the/g
+:3,547s/thee/the/g
+:%s/thee/the/g
+@:
+v > select text > :w test.txt
+:r
+* after selecting text
+* on a word
+"*y
+shift + v
+v select > gc
+gcc
+:3,13s/\<a\>/argv/g
+ZZ
+ZQ
+f(char)
+2f(char)
+f veya t den sonra ; veya ,
+F
+T
+t(char)
+W
+b
+B
+e
+E
+:map
+shift+p // in visual mod
+<alt>command // in insert mode acts like normal mode
+ci"
+cgn
+ciw
+* on a word 
+# on a word 
+vi}
+viw
+viW
+va}
+    can change v as y d etc.
+:mkview
+:loadview
+{
+}
+:sb2 --sayi buffer numarasi
+:vert sb2
+S
+
+read
+:help
+practical vim
+modern vim
+
+------PLUGINS------
+which-key.nvim
+    <leader>ff
+telescope.nvim
+    <leader>s
+    -gd
+    -gr
+    -<leader>ds
+    -K
+telescope-undo
+    <leader>u
+
+------windows terminal------
+shift+alt+ -
+shift+alt+ =
+shift+alt+ arrow keys
+alt+arrow keys
+ctrl+shift+w
+
