@@ -4,12 +4,12 @@
 
 int main()
 {
-    std::cout << "\033[2J\033[H";
+    // std::cout << "\033[2J\033[H";
 
-    int r{20}, x{}, y{};
+    int r{10}, x{}, y{};
     double angle{};
 
-    constexpr int thickness{7}, dots{360};
+    constexpr int thickness{3}, dots{360};
     constexpr double pi{3.14159265358979323846}, angle_increment{2 * pi / dots};
 
     int x_length{4 * (r + thickness) - 3}, y_length{2 * (r + thickness) - 1};
@@ -28,12 +28,12 @@ int main()
             y += r + (thickness - z) - 1;
 
             grid[y][x] = '$';
-            // std::cout << y << " - " << x << "\n";
         }
         r++;
     }
 
-    while (1)
+    int xxx{};
+    while (xxx == 0)
     {
         for (const auto &ordinat : grid)
         {
@@ -43,6 +43,7 @@ int main()
             }
             std::cout << '\n';
         }
+        xxx += 1;
     }
     return 0;
 }
