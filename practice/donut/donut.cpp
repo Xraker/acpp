@@ -11,10 +11,10 @@ int main()
     // min r = 0 max thickness = 78 on 2560x1440
 
     // max r = 58 min thickness = 1 on 1920x1080
-    // min r = 0 max thickness = 60 on 1920x1080
+    //  min r = 0 max thickness = 60 on 1920x1080
 
-    int r{0}, x{}, y{};
-    constexpr int thickness{60}, dots{360};
+    int r{10}, x{}, y{};
+    constexpr int thickness{20}, dots{360};
     double angle{};
 
     constexpr double pi{3.14159265358979323846}, angle_increment{2 * pi / dots};
@@ -35,7 +35,7 @@ int main()
             x += 2 * r + 2 * (thickness - z) - 2;
             y += r + (thickness - z) - 1;
 
-            grid[y][x] = '$';
+            grid[y][x] = '.';
         }
         r++;
     }
@@ -45,14 +45,15 @@ int main()
     {
         for (int o{2}; o < x_length - 2; o++)
         {
-            if (grid[u][o + 2] != ' ' && grid[u][o + -2] != ' ' || grid[u + 1][o] != ' ' && grid[u - 1][o] != ' ')
-                grid[u][o] = '$';
+            if (grid[u][o + 2] != ' ' && grid[u][o + -2] != ' ' && grid[u][o] == ' ' ||
+                grid[u + 1][o] != ' ' && grid[u - 1][o] != ' ' && grid[u][o] == ' ')
+                grid[u][o] = '.';
         }
     }
 
     // print the circle
     int xxx{};
-    while (xxx == 0)
+    while (xxx != 1)
     {
         for (const auto &ordinat : grid)
         {
@@ -63,6 +64,7 @@ int main()
             std::cout << '\n';
         }
         xxx += 1;
+        // std::cout << "\033[2J\033[H";
     }
     return 0;
 }
