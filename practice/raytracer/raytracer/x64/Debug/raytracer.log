@@ -1,5 +1,0 @@
-﻿  main.cpp
-C:\acpp\practice\raytracer\main.cpp(144,11): warning C4101: 'mag': unreferenced local variable
-C:\acpp\practice\raytracer\main.cpp(199,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\acpp\practice\raytracer\main.cpp(200,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  raytracer.vcxproj -> C:\acpp\practice\raytracer\x64\Debug\raytracer.exe
