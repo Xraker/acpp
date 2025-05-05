@@ -1,3 +1,14 @@
+--[[
+leader c
+leader e
+leader w
+leader rr
+leader tt
+leader 1 2 3 4 5
+
+
+]]
+
 vim.env.LANG = 'en_US.UTF-8'
 vim.env.LC_ALL = 'en_US.UTF-8'
 vim.opt.shada = ""
@@ -102,7 +113,7 @@ vim.api.nvim_create_autocmd('TermOpen', {
 })
 vim.keymap.set("t", "<leader>e", function()
     local filename = vim.g.terminal_file or "unknown_file"
-    local command = "g++ -Wall -Werror -std=c++98 -fno-exceptions -fno-rtti -o " .. filename .. ".exe " .. filename .. ".cpp\r\n"
+    local command = "g++ -std=c++98 -fno-exceptions -fno-rtti -o " .. filename .. ".exe " .. filename .. ".cpp\r\n"
     local command2 = ".\\" .. filename .. ".exe\r\n"
 
     vim.api.nvim_chan_send(vim.b.terminal_job_id, command)
@@ -111,6 +122,7 @@ end, { noremap = true, silent = true })
 
 vim.g.terminal_pos = { width = math.floor(vim.o.columns * 0.5), height = math.floor(vim.o.lines * 0.5), row = (vim.o.lines - math.floor(vim.o.lines * 0.5)) / 2, col = (vim.o.columns - math.floor(vim.o.columns * 0.5)) / 2 }
 function terminal() -- 1. Removed key mapping and made it a standalone function
+    
     vim.g.terminal_file = vim.fn.expand("%:t"):gsub("%.cpp$", "")
     if vim.g.mywin and vim.api.nvim_win_is_valid(vim.g.mywin) then
         vim.api.nvim_win_hide(vim.g.mywin)
@@ -132,10 +144,18 @@ function terminal() -- 1. Removed key mapping and made it a standalone function
         vim.g.mywin = vim.api.nvim_open_win(buf, true, opts)
         vim.cmd("startinsert")
         if vim.api.nvim_buf_line_count(buf) == 1 and vim.api.nvim_buf_get_lines(buf, 0, 1, false)[1] == "" then
-            vim.fn.termopen(vim.o.shell, { on_exit = function() vim.g.mybuf = nil end })
+            vim.g.myjob = vim.fn.termopen(vim.o.shell, {
+                on_exit = function()
+                    vim.g.mybuf = nil
+                    vim.g.myjob = nil
+                end
+            })
+            
         end
     end
 end
+vim.cmd("autocmd QuitPre * if g:myjob | call jobstop(g:myjob) | endif")
+
 
 local function set_terminal_position(width, height, row, col)
     vim.g.terminal_pos = { width = width, height = height, row = row, col = col }
@@ -219,4 +239,26 @@ vim.keymap.set("n", "<leader>tt", function()
     vim.api.nvim_set_hl(0, "StatusLineNC", { bg = new_bg })
 
 end)
+
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>")
+
+vim.keymap.set("n", "k", function()
+	if vim.fn.line(".") == 1 then
+		return "O<Esc>"
+	end
+	return "k"
+end, { expr = true })
+
+vim.keymap.set("n", "j", function()
+	if vim.fn.line(".") == vim.fn.line("$") then
+		return "o<Esc>"
+	end
+	return "j"
+end, { expr = true })
+
+vim.keymap.set("n", "<leader>c", ":e C:/Users/aa/AppData/Local/nvim/init.lua<CR>")
+
+
+
+
 
